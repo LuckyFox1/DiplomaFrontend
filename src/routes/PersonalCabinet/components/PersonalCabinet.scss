@@ -1,0 +1,95 @@
+.photoWrapper {
+  width: 26%;
+}
+
+.infoWrapper {
+  width: 72%;
+}
+
+.personalInfo {
+  height: 300px;
+}
+
+.photoWrapper,
+.infoWrapper {
+  border: 1px solid #e0e0e0;
+  height: 100%;
+}
+
+.photoWrapper {
+  display: table;
+}
+
+.infoWrapper {
+  padding: 20px;
+  text-align: left;
+
+  .id {
+    color: #a5a5a5;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+}
+
+.photo {
+  padding: 20px;
+  display: table-cell;
+  vertical-align: middle;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.scheduleWrapper {
+  .scheduleHeader {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(242, 148, 0, 0.65) 18%, #f29400 50%, rgba(242, 148, 0, 0.65) 82%, rgba(255, 255, 255, 0) 100%);
+    margin: 20px 0;
+    padding: 4px 0 10px;
+    color: #ffffff;
+  }
+
+  .schedule {
+    padding: 0;
+  }
+
+  .schedule > li {
+    list-style-type: none;
+    text-align: left;
+    padding: 10px 20px;
+    border-bottom: none;
+
+    &:last-child {
+      border-bottom: 1px solid rgba(0, 0, 0, .125);
+    }
+
+    .fullName,
+    .time,
+    .reason {
+      vertical-align: top;
+      line-height: 38px;
+      display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .time {
+      width: 138px;
+    }
+
+    .fullName {
+      width: 260px;
+      padding-right: 20px;
+    }
+
+    .reason {
+      width: calc(100% - 398px);
+    }
+
+    .btn {
+      border-color: #e0e0e0;
+    }
+  }
+}

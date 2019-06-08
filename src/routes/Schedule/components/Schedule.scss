@@ -1,0 +1,25 @@
+.register {
+  text-align: left;
+
+  .form-group {
+    .required {
+      color: #dc3545;
+    }
+  }
+
+.requiredLabel {
+  color: #dc3545;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+  .registerBtn {
+    background-color: #f29400;
+    border-color: #f29400;
+
+    &:hover {
+      background-color: rgb(241, 102, 0);
+      border-color: rgb(241, 102, 0);
+    }
+  }
+}

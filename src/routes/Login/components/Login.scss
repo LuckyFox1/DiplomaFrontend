@@ -1,0 +1,27 @@
+.register {
+  text-align: left;
+
+  form {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .invalid-feedback {
+    width: auto;
+  }
+
+  .is-invalid {
+    background-image: none;
+  }
+
+  .registerBtn {
+    background-color: #f29400;
+    border-color: #f29400;
+    margin-top: 5px;
+
+    &:hover {
+      background-color: rgb(241, 102, 0);
+      border-color: rgb(241, 102, 0);
+    }
+  }
+}

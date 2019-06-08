@@ -1,0 +1,59 @@
+.searchResults {
+  padding: 0;
+
+  & > li {
+    list-style-type: none;
+    margin-bottom: 20px;
+  }
+}
+
+.infoWrapper {
+  width: 79%;
+  padding: 20px;
+  text-align: left;
+
+  .fullName {
+    font-size: 18px;
+  }
+
+  .info {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .btn {
+    margin-top: 10px;
+  }
+}
+
+.personalInfo {
+  height: 210px;
+}
+
+.photoWrapper,
+.infoWrapper {
+  border: 1px solid #e0e0e0;
+  height: 100%;
+}
+
+.photoWrapper {
+  display: table;
+  width: 19%;
+}
+
+.photo {
+  padding: 20px;
+  display: table-cell;
+  vertical-align: middle;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    max-height: 140px;
+  }
+}
+
+.btn {
+  border-color: #ced4da;
+  color: #495057;
+}

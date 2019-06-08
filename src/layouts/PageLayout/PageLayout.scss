@@ -1,0 +1,71 @@
+.page-layout__viewport {
+  padding: 20px;
+  border: 1px solid #b7b7b7;
+  border-top: none;
+  border-bottom: none;
+  min-height: calc(100vh - 58px);
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.page-layout__wrapper {
+  background-color: #e6e6e6;
+}
+
+.page-layout__nav-item--active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+div.container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+
+.mainPage {
+  float: left;
+}
+
+.rightLinks {
+  float: right;
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
+
+.header {
+  padding: 0 10px;
+  background-color: white;
+  border-bottom: 4px solid rgb(242, 148, 0);
+
+  .link {
+    color: black;
+    line-height: 34px;
+    padding: 10px;
+    display: inline-block;
+
+    &.personalCabinet {
+      background: url("./assets/UserCabinet.png") 0 0 no-repeat;
+      background-size: contain;
+      width: 25px;
+      height: 25px;
+      vertical-align: middle;
+      margin: 0 10px 4px;
+
+      &:hover,
+      &.page-layout__nav-item--active {
+        background-image: url("./assets/UserCabinetHover.png");
+      }
+    }
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}

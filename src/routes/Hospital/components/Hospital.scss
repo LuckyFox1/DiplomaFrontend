@@ -1,0 +1,142 @@
+.hospitalWrapper {
+  .title {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(242, 148, 0, 0.65) 18%, #f29400 50%, rgba(242, 148, 0, 0.65) 82%, rgba(255, 255, 255, 0) 100%);
+    margin: 0 0 20px 0;
+    padding: 4px 0 10px;
+  }
+
+  .card {
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .card-header {
+    padding: 5px 20px 5px 10px;
+
+    h5 {
+      text-align: left;
+      color: black;
+    }
+
+    .balance {
+      font-size: 16px;
+      font-weight: normal;
+      line-height: 34px;
+    }
+
+    .btn-link {
+      color: black;
+    }
+  }
+
+  .card-body {
+    .beds {
+      padding: 0;
+      margin: 0;
+
+      & > li {
+        list-style-type: none;
+        border: 1px solid #e0e0e0;
+        padding: 10px;
+        margin-bottom: 10px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &:after {
+          content: '';
+          display: block;
+          clear: both;
+        }
+
+        &.free {
+          background-color: #eaffea;
+        }
+
+        .until {
+          width: 130px;
+          text-align: center;
+        }
+
+        .number {
+          padding-right: 10px;
+        }
+
+        .name {
+          &.empty {
+            width: 100px;
+            text-align: center;
+          }
+        }
+
+        .btn {
+          background: url("../assets/editIcon.png") 0 0 no-repeat;
+          background-size: cover;
+          height: 25px;
+          width: 25px;
+
+          &.disabled {
+            background: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.medicalCardWrapper {
+  .tableHeader {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(242, 148, 0, 0.75) 3%, rgba(242, 148, 0, 1) 5%, #f29400 50%, rgba(242, 148, 0, 1) 95%, rgba(242, 148, 0, 0.75) 97%, rgba(255, 255, 255, 0) 100%);
+    margin: 0 0 20px;
+    padding: 6px 25px 10px;
+    text-align: left;
+  }
+
+  .date,
+  .type,
+  .doctor {
+    vertical-align: top;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right: 20px;
+  }
+
+  .date {
+    width: 100px;
+  }
+
+  .type {
+    width: 200px;
+  }
+
+  .notes {
+    padding: 0;
+
+    & > li {
+      list-style-type: none;
+      text-align: left;
+      padding: 10px 20px;
+      border-bottom: none;
+
+      &:last-child {
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
+      }
+    }
+
+    .date,
+    .type,
+    .doctor {
+      line-height: 35px;
+    }
+
+    .btn {
+      border-color: #e0e0e0;
+    }
+  }
+}
