@@ -48,3 +48,13 @@ export function getParsedDate (date) {
     day: date.getDate()
   }
 }
+
+export function getParsedTime (time) {
+  const timeArr = time.split(':')
+
+  return {
+    hours: timeArr[0],
+    minutes: timeArr[1],
+    seconds: timeArr[2]
+  }
+}

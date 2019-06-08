@@ -1,25 +1,68 @@
-.register {
-  text-align: left;
-
-  .form-group {
-    .required {
-      color: #dc3545;
-    }
-  }
-
-.requiredLabel {
-  color: #dc3545;
-  margin-bottom: 20px;
-  font-size: 14px;
+.photoWrapper {
+  width: 26%;
 }
 
-  .registerBtn {
-    background-color: #f29400;
-    border-color: #f29400;
+.infoWrapper {
+  width: 72%;
+}
 
-    &:hover {
-      background-color: rgb(241, 102, 0);
-      border-color: rgb(241, 102, 0);
-    }
+.personalInfo {
+  height: 300px;
+}
+
+.photoWrapper,
+.infoWrapper {
+  border: 1px solid #e0e0e0;
+  height: 100%;
+}
+
+.photoWrapper {
+  display: table;
+}
+
+.infoWrapper {
+  padding: 20px;
+  text-align: left;
+
+  .id {
+    color: #a5a5a5;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+}
+
+.photo {
+  padding: 20px;
+  display: table-cell;
+  vertical-align: middle;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.fullName {
+  margin-bottom: 20px;
+}
+
+.btn {
+  border-color: #e0e0e0;
+
+  &.viewSchedule {
+    margin-top: 20px;
+  }
+}
+
+.scheduleWrapper {
+  border: 1px solid #e0e0e0;
+  margin-top: 20px;
+  padding: 20px;
+
+  .title {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(242, 148, 0, 0.65) 18%, #f29400 50%, rgba(242, 148, 0, 0.65) 82%, rgba(255, 255, 255, 0) 100%);
+    margin: 0 0 20px 0;
+    padding: 4px 0 10px;
+    color: #ffffff;
   }
 }
