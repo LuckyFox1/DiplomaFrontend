@@ -58,3 +58,34 @@ export function getParsedTime (time) {
     seconds: timeArr[2]
   }
 }
+
+export function getTimeInMinutes (timeObject) {
+  const { hours, minutes, seconds } = timeObject
+
+  return (+hours) * 60 + (+minutes) + (+seconds)
+}
+
+export function getTimeInObject (timeInMinutes) {
+  return {
+    hours: Math.floor(timeInMinutes / 60),
+    minutes: timeInMinutes % 60,
+    seconds: timeInMinutes % 3600
+  }
+}
+
+export function getReceptions (startWorkDay, endWorkDay, startDinner, endDinner, receptionDuration) {
+  const startWorkDayInMinutes = getTimeInMinutes(startWorkDay)
+  const endWorkDayInMinutes = getTimeInMinutes(endWorkDay)
+  const startDinnerInMinutes = getTimeInMinutes(startDinner)
+  const endDinnerInMinutes = getTimeInMinutes(endDinner)
+  let receptions = []
+
+  for (let time = startWorkDayInMinutes; time < endWorkDayInMinutes; time += receptionDuration) {
+    if (time >= startDinnerInMinutes && time < endDinnerInMinutes) {
+      time = endDinnerInMinutes
+    }
+    receptions = [...receptions, getTimeInObject(time)]
+  }
+
+  return receptions
+}

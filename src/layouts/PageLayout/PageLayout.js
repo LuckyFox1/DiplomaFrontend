@@ -27,6 +27,7 @@ class PageLayout extends Component {
     removeCookie('userID')
     removeCookie('userRole')
     this.updateState()
+    console.log(this.state)
   }
 
   render () {

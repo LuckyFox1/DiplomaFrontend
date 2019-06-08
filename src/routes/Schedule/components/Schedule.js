@@ -4,15 +4,15 @@ import './Schedule.scss'
 import UserIconPlaceholder from '../assets/UserIconPlaceholder.jpg'
 
 class Schedule extends Component {
-  componentDidMount () {
-    const { fetchDoctorSchedule, params } = this.props
+  componentDidMount() {
+    const {fetchDoctorSchedule, params} = this.props
 
     fetchDoctorSchedule(params.id)
   }
 
-  render () {
-    const { toggleSchedule } = this.props
-    const { user, scheduleIsOpened } = this.props.schedule
+  render() {
+    const {toggleSchedule} = this.props
+    const {user, scheduleIsOpened, receptions} = this.props.schedule
     const dateOfBirth = user ? user.dateOfBirth : {}
     let startWorkDay, endWorkDay, startDinner, endDinner
 
@@ -31,8 +31,8 @@ class Schedule extends Component {
               <div className='photo'>
                 {
                   !user.image
-                    ? <img src={UserIconPlaceholder} alt='User photo' />
-                    : <img src={user.image} alt='User photo' />
+                    ? <img src={UserIconPlaceholder} alt='User photo'/>
+                    : <img src={user.image} alt='User photo'/>
                 }
               </div>
             </div>
@@ -49,7 +49,7 @@ class Schedule extends Component {
                 Обідня перерва: {startDinner.hours}:{startDinner.minutes} - {endDinner.hours}:{endDinner.minutes}
               </div>
               <button
-                className={'btn btn-light viewSchedule'}
+                className={`btn btn-light viewSchedule ${scheduleIsOpened ? 'active' : ''}`}
                 onClick={() => toggleSchedule(!scheduleIsOpened)}
               >
                 Переглянути графік
@@ -58,9 +58,25 @@ class Schedule extends Component {
           </div> : ''
       }
       {
-        scheduleIsOpened
-        ? <div className={'scheduleWrapper'}>
+        scheduleIsOpened && receptions
+          ? <div className={'scheduleWrapper'}>
             <h4 className='title'>Графік прийомів</h4>
+            {
+              user.byOrder
+                ? <div className={'schedule'}>
+                  {
+                    receptions.map(reception => {
+                      return <button className={'btn btn-primary'}>
+                        {reception.hours}:{reception.minutes}
+                      </button>
+                    })
+                  }
+                </div>
+                : <div>
+                  До даного лікаря немає можливості записатись на прийом, але ви можете потрапити до нього в умовах
+                  живої черги в робочі години.
+                </div>
+            }
           </div>
           : ''
       }

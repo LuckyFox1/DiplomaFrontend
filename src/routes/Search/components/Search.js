@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router'
 import './Search.scss'
 import UserIconPlaceholder from '../assets/UserIconPlaceholder.jpg'
 import { getCookie } from '../../../utils'
@@ -50,10 +51,10 @@ class Search extends Component {
             ? <ul className='searchResults'>
               {
                 search.users.map(user => {
-                  const { name, surname, patronymic, image, gender, dateOfBirth, position, roomNumber } = user
+                  const { name, surname, patronymic, image, gender, dateOfBirth, position, roomNumber, userID } = user
                   const { day, month, year } = dateOfBirth
 
-                  return <li>
+                  return <li key={userID}>
                     <div className='personalInfo'>
                       <div className='photoWrapper left'>
                         <div className='photo'>
@@ -70,7 +71,12 @@ class Search extends Component {
                         <div className='info'>Дата народження: {day}.{month}.{year}</div>
                         <div className='info'>Посада: {position}</div>
                         <div className='info'>Кабінет: №{roomNumber}</div>
-                        <button className='btn btn-light'>Відкрити медичну картку</button>
+                        <Link
+                          className='btn btn-light'
+                          to={`/schedule/${userID}`}
+                        >
+                          Перейти до профілю
+                        </Link>
                       </div>
                     </div>
                   </li>

@@ -1,9 +1,17 @@
 import axios from 'axios'
-import { getParsedDate, getParsedTime } from '../../../utils'
+import { getParsedDate, getParsedTime, getReceptions } from '../../../utils'
 export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC'
 export const SET_DOCTOR = 'SET_DOCTOR'
 export const TOGGLE_SCHEDULE = 'TOGGLE_SCHEDULE'
+export const SET_RECEPTIONS = 'SET_RECEPTIONS'
+
+export const setReceptions = (receptions) => {
+  return {
+    type: SET_RECEPTIONS,
+    receptions
+  }
+}
 
 export const setDoctor = (user) => {
   return {
@@ -23,8 +31,12 @@ export const fetchDoctorSchedule = (doctorID) => (dispatch) => {
   axios.get(`http://localhost:3001/schedule/doctor/${doctorID}`)
     .then(data => {
       const { user } = data.data
+      const receptions =
+        getReceptions(getParsedTime(user.startWorkDay), getParsedTime(user.endWorkDay), getParsedTime(user.startDinner),
+          getParsedTime(user.endDinner), user.receptionDuration)
 
       dispatch(setDoctor(user))
+      dispatch(setReceptions(receptions))
     })
 }
 
@@ -78,6 +90,12 @@ const ACTION_HANDLERS = {
     return {
       ...state,
       scheduleIsOpened: action.scheduleIsOpened
+    }
+  },
+  [SET_RECEPTIONS] : (state, action) => {
+    return {
+      ...state,
+      receptions: action.receptions
     }
   }
 }
