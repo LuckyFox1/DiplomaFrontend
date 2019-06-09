@@ -33,7 +33,7 @@ class Search extends Component {
         <input
           type='text'
           className='form-control'
-          placeholder={"Ім'я " + (role === 'patient' ? 'лікаря' : 'користувача')}
+          placeholder={"Ім'я " + (role === 'patient' ? 'лікаря' : 'пацієнта')}
           ref={el => this.searchInput = el}
         />
         <div className='input-group-append'>
@@ -69,11 +69,19 @@ class Search extends Component {
                         <h4 className='fullName'>{surname} {name} {patronymic}</h4>
                         <div className='info'>Стать: {gender}</div>
                         <div className='info'>Дата народження: {day}.{month}.{year}</div>
-                        <div className='info'>Посада: {position}</div>
-                        <div className='info'>Кабінет: №{roomNumber}</div>
+                        {
+                          role === 'patient'
+                            ? <div className='info'>Посада: {position}</div>
+                            : <div>Телефон: {!user.phone ? 'Не вказано' : user.phone}</div>
+                        }
+                        {
+                          role === 'patient'
+                            ? <div className='info'>Кабінет: №{roomNumber}</div>
+                            : <div>Адрес: {!user.address ? 'Не вказано' : user.address} </div>
+                        }
                         <Link
                           className='btn btn-light'
-                          to={`/schedule/${userID}`}
+                          to={role === 'patient' ? `/schedule/${userID}` : `/patient/${userID}`}
                         >
                           Перейти до профілю
                         </Link>

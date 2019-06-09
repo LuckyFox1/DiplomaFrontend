@@ -8,6 +8,7 @@ import HospitalRoute from './Hospital'
 import LabRoute from './Lab'
 import LoginRoute from './Login'
 import ScheduleRoute from './Schedule'
+import PatientProfileRoute from './PatientProfile'
 
 export const createRoutes = (store) => ({
   path        : '/',
@@ -21,7 +22,8 @@ export const createRoutes = (store) => ({
     HospitalRoute(store),
     LabRoute(store),
     LoginRoute(store),
-    ScheduleRoute(store)
+    ScheduleRoute(store),
+    PatientProfileRoute(store)
   ]
 })
 
