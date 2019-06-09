@@ -84,7 +84,7 @@ class PageLayout extends Component {
 
         <div className={loggedInPatientCn}>
           <Link to='/search' className='link search' activeClassName='page-layout__nav-item--active'>
-            Лікарі
+            Пошук
           </Link>
           <Link to='/medicalCard' className='link search' activeClassName='page-layout__nav-item--active'>
             Медична карта

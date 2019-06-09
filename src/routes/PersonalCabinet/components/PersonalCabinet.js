@@ -2,55 +2,26 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import './PersonalCabinet.scss'
 import UserIconPlaceholder from '../assets/UserIconPlaceholder.jpg'
+import {getParsedTime} from "../../../utils";
 
 class PersonalCabinet extends Component {
   componentDidMount() {
-    const {fetchPersonalCabinetInfo} = this.props
+    const { fetchPersonalCabinetInfo } = this.props
 
     fetchPersonalCabinetInfo()
   }
 
-  render() {
-    const {user, receptions} = this.props.personalCabinet
-    /*
-    return <div className='personalCabinet'>
-      <div className='personalInfo'>
-        <div className='photoWrapper left'>
-          <div className='photo'>
-            <img src={UserIconPlaceholder} alt='User photo' />
-          </div>
-        </div>
-        <div className='infoWrapper right'>
-          <h4 className='fullName'>Іванова Антоніна Олексіївна</h4>
-          <div className='id'>ID: 1</div>
-          <div>Стать: жіноча</div>
-          <div>Дата народження: 12.10.1989</div>
-          <div>Телефон: 0664444123</div>
-          <div>Адрес: м. Черкаси, вул. Чехова, буд. 23, кв. 46 </div>
-        </div>
-      </div>
-      <div className='scheduleWrapper'>
-        <h4 className='scheduleHeader'>Графік прийомів</h4>
-        <ul className='schedule list-group'>
-          <li className='list-group-item rounded-0'>
-            <span className='time'>09:20 - 09:40</span>
-            <span className='fullName'>Мусієнко Валентина Миколаївна</span>
-            <button className='btn btn-light right'>Відкрити медичну карту</button>
-          </li>
-          <li className='list-group-item rounded-0'>
-            <span className='time'>10:00 - 10:20</span>
-            <span className='fullName'>Бондаренко Марина Іванівна</span>
-            <button className='btn btn-light right'>Відкрити медичну карту</button>
-          </li>
-          <li className='list-group-item rounded-0'>
-            <span className='time'>10:20 - 10:40</span>
-            <span className='fullName'>Зобенко Дарина Андріївна</span>
-            <button className='btn btn-light right'>Відкрити медичну карту</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-    */
+  render () {
+    const { user, receptions } = this.props.personalCabinet
+    let startWorkDay, endWorkDay, startDinner, endDinner
+
+    if (user) {
+      startWorkDay = getParsedTime(user.startWorkDay)
+      endWorkDay = getParsedTime(user.endWorkDay)
+      startDinner = getParsedTime(user.startDinner)
+      endDinner = getParsedTime(user.endDinner)
+    }
+
     return <div className='personalCabinet'>
       {
         user
@@ -67,12 +38,25 @@ class PersonalCabinet extends Component {
               <div>Дата народження: {user.dateOfBirth.day}.{user.dateOfBirth.month}.{user.dateOfBirth.year}</div>
               <div>Телефон: {!user.phone ? 'Не вказано' : user.phone}</div>
               <div>Адрес: {!user.address ? 'Не вказано' : user.address} </div>
+              {
+                user.role === 'doctor'
+                ? <div>
+                  <div>Посада: {user.position}</div>
+                  <div>Кімната: №{user.roomNumber}</div>
+                  <div>
+                    Графік роботи: {startWorkDay.hours}:{startWorkDay.minutes} - {endWorkDay.hours}:{endWorkDay.minutes}
+                  </div>
+                  <div>
+                    Обідня перерва: {startDinner.hours}:{startDinner.minutes} - {endDinner.hours}:{endDinner.minutes}
+                  </div>
+                 </div> : ''
+              }
             </div>
           </div>
           : ''
       }
       {
-        receptions
+        receptions && user.role === 'patient'
           ? <div className='scheduleWrapper'>
             <h4 className='scheduleHeader'>Заплановані візити</h4>
             <ul className='schedule list-group'>
@@ -92,7 +76,26 @@ class PersonalCabinet extends Component {
               }
             </ul>
           </div>
-          : ''
+          : <div className='scheduleWrapper'>
+            <h4 className='scheduleHeader'>Графік прийомів</h4>
+            <ul className='schedule list-group'>
+              {
+                receptions && receptions.map(reception => {
+                  const { startReception, endReception } = reception
+
+                  return <li key={reception.receptionID} className='list-group-item rounded-0'>
+                    <span className='time'>
+                      {startReception.hours}:{startReception.minutes} - {endReception.hours}:{endReception.minutes}
+                    </span>
+                    <span className='fullName'>
+                      {reception.patientsurname} {reception.patientname} {reception.patientpatronymic}
+                    </span>
+                    <button className='btn btn-light right'>Відкрити медичну карту</button>
+                  </li>
+                })
+              }
+            </ul>
+          </div>
       }
     </div>
   }
