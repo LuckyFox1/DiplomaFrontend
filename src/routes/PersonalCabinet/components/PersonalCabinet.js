@@ -15,7 +15,7 @@ class PersonalCabinet extends Component {
     const { user, receptions } = this.props.personalCabinet
     let startWorkDay, endWorkDay, startDinner, endDinner
 
-    if (user) {
+    if (user && user.role === 'doctor') {
       startWorkDay = getParsedTime(user.startWorkDay)
       endWorkDay = getParsedTime(user.endWorkDay)
       startDinner = getParsedTime(user.startDinner)
@@ -61,9 +61,9 @@ class PersonalCabinet extends Component {
             <h4 className='scheduleHeader'>Заплановані візити</h4>
             <ul className='schedule list-group'>
               {
-                receptions.map(reception => {
+                receptions.map((reception, index) => {
                   let { day, month, year, hours, minutes } = reception.startReception
-                  return <li key={reception.receptionID} className='list-group-item rounded-0'>
+                  return <li key={reception.receptionID + '' + index} className='list-group-item rounded-0'>
                     <span className='time'>
                       {day}.{month}.{year} {hours}:{minutes}
                     </span>
@@ -80,10 +80,10 @@ class PersonalCabinet extends Component {
             <h4 className='scheduleHeader'>Графік прийомів</h4>
             <ul className='schedule list-group'>
               {
-                receptions && receptions.map(reception => {
+                receptions && receptions.map((reception, index) => {
                   const { startReception, endReception } = reception
 
-                  return <li key={reception.receptionID} className='list-group-item rounded-0'>
+                  return <li key={reception.receptionID + '' + index} className='list-group-item rounded-0'>
                     <span className='time'>
                       {startReception.hours}:{startReception.minutes} - {endReception.hours}:{endReception.minutes}
                     </span>

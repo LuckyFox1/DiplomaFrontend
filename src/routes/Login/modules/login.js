@@ -28,17 +28,11 @@ export const loginUser = (login, password) => (dispatch) => {
         setCookie('userID', user.userID, 7)
         setCookie('userRole', user.role, 7)
         window.location.pathname = '/'
-        /*
-        dispatch(setUser(user))
-        dispatch(setFormState(success, ''))
-        */
       } else {
         dispatch(setFormState(success, message))
       }
     })
 }
-
-export const actions = {}
 
 const ACTION_HANDLERS = {
   [SET_USER] : (state, action) => {

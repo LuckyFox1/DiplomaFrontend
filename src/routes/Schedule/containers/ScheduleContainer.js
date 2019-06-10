@@ -1,13 +1,11 @@
 import { connect } from 'react-redux'
-import { increment, doubleAsync, fetchDoctorSchedule, toggleSchedule } from '../modules/schedule'
+import { fetchDoctorSchedule, toggleSchedule } from '../modules/schedule'
 
 import Schedule from '../components/Schedule'
 
 const mapDispatchToProps = {
   fetchDoctorSchedule,
-  toggleSchedule,
-  increment : () => increment(1),
-  doubleAsync
+  toggleSchedule
 }
 
 const mapStateToProps = (state) => ({
