@@ -1,10 +1,8 @@
 import axios from 'axios'
-import { getCookie, getParsedDateTime, getParsedDate } from '../../../utils'
+import { getParsedDateTime, getParsedDate } from '../../../utils'
 
-export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
-export const COUNTER_DOUBLE_ASYNC = 'COUNTER_DOUBLE_ASYNC'
 export const SET_USER = 'SET_USER'
-export const SET_RECEPTIONS = 'SET_RECEPTIONS'
+export const SET_NOTES = 'SET_NOTES'
 
 export const setUser = (user) => {
   return {
@@ -13,46 +11,24 @@ export const setUser = (user) => {
   }
 }
 
-export const setReceptions = (receptions) => {
+export const setNotes = (medicalNotes) => {
   return {
-    type: SET_RECEPTIONS,
-    receptions
+    type: SET_NOTES,
+    medicalNotes
   }
 }
 
-export const fetchPersonalCabinetInfo = () => (dispatch) => {
-  const userID = getCookie('userID')
-  const userRole = getCookie('userRole')
-  axios.get(`http://localhost:3001/personalCabinet/${userRole}/${userID}`)
+export const fetchPatientProfileInfo = (id) => (dispatch) => {
+  axios.get(`http://localhost:3001/profile/patient/${id}`)
     .then(data => {
-      const { receptions, user } = data.data
+      const { medicalNotes, user } = data.data
 
       dispatch(setUser(user))
-      dispatch(setReceptions(receptions))
+      dispatch(setNotes(medicalNotes))
     })
-}
-
-export const doubleAsync = () => {
-  return (dispatch, getState) => {
-    axios.post('http://localhost:3001/test', {id: 'test'})
-      .then(data => {
-        console.log(data)
-      })
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch({
-          type: COUNTER_DOUBLE_ASYNC,
-          payload: getState().personalCabinet
-        })
-        resolve()
-      }, 200)
-    })
-  }
 }
 
 const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]: (state, action) => state + action.payload,
-  [COUNTER_DOUBLE_ASYNC]: (state, action) => state * 2,
   [SET_USER]: (state, action) => {
     const date = new Date(action.user.dateOfBirth)
 
@@ -64,17 +40,13 @@ const ACTION_HANDLERS = {
       }
     }
   },
-  [SET_RECEPTIONS]: (state, action) => {
+  [SET_NOTES] : (state, action) => {
     return {
       ...state,
-      receptions: action.receptions.map((item) => {
-        const dateEndReception = new Date(item.endReception)
-        const dateStartReception = new Date(item.startReception)
-
+      medicalNotes: action.medicalNotes.map(item => {
         return {
           ...item,
-          endReception: getParsedDateTime(dateEndReception),
-          startReception: getParsedDateTime(dateStartReception)
+          date: getParsedDateTime(new Date(item.date))
         }
       })
     }
@@ -82,7 +54,7 @@ const ACTION_HANDLERS = {
 }
 
 const initialState = {}
-export default function patientProfileReducer(state = initialState, action) {
+export default function patientProfileReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
