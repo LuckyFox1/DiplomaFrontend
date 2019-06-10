@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './PatientProfile.scss'
 import UserIconPlaceholder from '../assets/UserIconPlaceholder.jpg'
+import {Link} from "react-router";
 // import { getParsedTime } from '../../../utils'
 
 class PatientProfile extends Component {
@@ -38,6 +39,7 @@ class PatientProfile extends Component {
       {
         medicalNotes
           ? <div className={'medicalNotesWrapper'}>
+            <Link to={'/creatingNote'} className={'btn btn-light createNote'}>Створити новий запис</Link>
             <div className='tableHeader'>
               <span className='date'>Дата</span>
               <span className='type'>Тип</span>

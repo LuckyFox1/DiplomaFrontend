@@ -1,0 +1,81 @@
+.creatingNoteWrapper {
+  .title {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(242, 148, 0, 0.65) 18%, #f29400 50%, rgba(242, 148, 0, 0.65) 82%, rgba(255, 255, 255, 0) 100%);
+    margin: 0 0 20px 0;
+    padding: 4px 0 10px;
+    color: #ffffff;
+  }
+
+  .type {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    color: #000000;
+  }
+
+  .analysis {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+
+    .tableHeader {
+      background: linear-gradient(90deg,hsla(0,0%,100%,0) 0,rgba(242,148,0,.75) 3%,#f29400 5%,#f29400 50%,#f29400 95%,rgba(242,148,0,.75) 97%,hsla(0,0%,100%,0));
+      margin: 0 0 20px;
+      padding: 6px 25px 10px;
+      text-align: left;
+      color: #ffffff;
+    }
+
+    .propertiesList {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .property,
+    .normValue {
+      width: 50%;
+      display: inline-block;
+    }
+  }
+
+  .analysisListWrapper {
+    width: 26%;
+    text-align: left;
+  }
+
+  .analysisList {
+    margin-bottom: 20px;
+
+    & > li {
+      border-bottom: none;
+      text-align: left;
+      cursor: pointer;
+
+      &:hover,
+      &.active {
+        background-color: #f29400;
+        border-color: #f29400;
+        color: #ffffff;
+      }
+
+      &:last-child {
+        border-bottom: 1px solid #e0e0e0;
+      }
+    }
+  }
+
+  .analysis {
+    width: 72%;
+  }
+
+  .btn {
+    border-color: #e0e0e0;
+
+    &.edit {
+      margin-right: 20px;
+    }
+
+    &.create {
+      width: 100%;
+    }
+  }
+}
